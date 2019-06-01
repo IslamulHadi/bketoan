@@ -26,7 +26,7 @@ class AuthenticationBloc implements BlocBase {
   @override
   handleEvent(event) async {
     if (event is AppStarted) {
-      _authStateCtrl.sink.add(AuthenticationAuthenticated());
+      _authStateCtrl.sink.add(AuthenticationUnauthenticated());
     }
     if (event is LoggedIn) {
       _authStateCtrl.sink.add(AuthenticationLoading());

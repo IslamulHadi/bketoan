@@ -16,6 +16,26 @@ class _RegisterState extends State<Register> {
   AuthenticationBloc _authBloc;
 
   @override
+  void initState() {
+    super.initState();
+    _googleSignIn.onCurrentUserChanged
+        .listen((GoogleSignInAccount account) async {
+      if (account != null) {
+        final GoogleSignInAuthentication googleAuth =
+            await account.authentication;
+
+        final AuthCredential credential = GoogleAuthProvider.getCredential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+
+        final FirebaseUser user = await _auth.signInWithCredential(credential);
+        _authBloc.authEvent.add(LoggedIn(user: user));
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     _authBloc = Provider.of<AuthenticationBloc>(context);
     return Scaffold(
