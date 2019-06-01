@@ -33,6 +33,7 @@ class _RegisterState extends State<Register> {
         _authBloc.authEvent.add(LoggedIn(user: user));
       }
     });
+    _googleSignIn.signInSilently();
   }
 
   @override
