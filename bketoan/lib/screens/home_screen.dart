@@ -15,11 +15,11 @@ class _HomeState extends State<Home> {
   AuthenticationBloc _authBloc;
   final db = Firestore.instance;
   void deleteData(DocumentSnapshot doc) async {
-    await db.collection('questions').document(doc.documentID).delete();
+    await db.collection('quests').document(doc.documentID).delete();
   }
 
   void createData() async {
-    await db.collection('questions').add({
+    await db.collection('quests').add({
       'created_at': '9:00:00 AM',
       'label': 'labels/2nQdn2WmJbMGfJ4nEDJc',
       'question': 'Tes Pertanyaan5',
@@ -84,8 +84,8 @@ class _HomeState extends State<Home> {
         tooltip: 'Tambah Pertanyaan',
         onPressed: () {
           createData();
-           Navigator.push(
-               context, MaterialPageRoute(builder: (_) => AddPertanyaan()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => AddPertanyaan()));
         },
         child: Icon(Icons.add),
       ),

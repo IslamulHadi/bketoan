@@ -32,19 +32,20 @@ class _AddPertanyaanState extends State<AddPertanyaan> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     imagfile = null;
     super.dispose();
   }
+
   void createData() async {
-    await db.collection('questions').add({
+    await db.collection('quests').add({
       'created_at': formatedTanggal.toString(),
       'label': labelController.text,
       'question': questionController.text,
       'status': 'Active',
-          'displayName': 'Diaz',
-      'photoUrl' : 'https://lh4.googleusercontent.com/-Dylt4o3LZ5k/AAAAAAAAAAI/AAAAAAAABbI/fPHqc4i7jnY/s96-c/photo.jpg',
-      'anonim' : isanonym,
+      'displayName': 'Diaz',
+      'photoUrl':
+          'https://lh4.googleusercontent.com/-Dylt4o3LZ5k/AAAAAAAAAAI/AAAAAAAABbI/fPHqc4i7jnY/s96-c/photo.jpg',
+      'anonim': isanonym,
       'uid': 'zxl5g77iHdXfinbZThOSQUyoGlY2'
     });
   }
@@ -70,7 +71,7 @@ class _AddPertanyaanState extends State<AddPertanyaan> {
 //            Checkbox(value: true, onChanged: null)
                     Row(
                       children: <Widget>[
-                        Text('masuk sebagai anonym'),
+                        Text('Ask anonymously?'),
                         Checkbox(
                           value: isanonym,
                           onChanged: (value) {
@@ -96,10 +97,12 @@ class _AddPertanyaanState extends State<AddPertanyaan> {
                       height: 5.0,
                     ),
                     Text('Your Label'),
-                    InkWell(onTap: ()async{
-                      labelController.text = await Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => AddLabel()));
-                    },child: Icon(Icons.add)),
+                    InkWell(
+                        onTap: () async {
+                          labelController.text = await Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => AddLabel()));
+                        },
+                        child: Icon(Icons.add)),
                     InkWell(
                       onTap: () async {
                         print('tetete');
@@ -142,7 +145,8 @@ class _AddPertanyaanState extends State<AddPertanyaan> {
                               if (_formquestion.currentState.validate()) {
                                 _formquestion.currentState.save();
                                 createData();
-                                Navigator.push(context, MaterialPageRoute(builder: (_)=>Home()));
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (_) => Home()));
                               } else {
                                 _autovalidate = true;
                               }
@@ -151,7 +155,7 @@ class _AddPertanyaanState extends State<AddPertanyaan> {
                           ),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 )),
           ),
