@@ -124,6 +124,7 @@ packages:
     source: sdk
     version: "0.0.0"
   google_sign_in:
+<<<<<<< HEAD
     dependency: "direct main"
     description:
       name: google_sign_in
@@ -131,11 +132,14 @@ packages:
     source: hosted
     version: "4.0.1+3"
   image_picker:
+=======
+>>>>>>> 6d01d6fa9424baac8c7b24e5db0d1796996ba63b
     dependency: "direct main"
     description:
-      name: image_picker
+      name: google_sign_in
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "0.6.0+8"
   intl:
     dependency: "direct main"
@@ -144,6 +148,16 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.15.8"
+=======
+    version: "4.0.1+3"
+  image_picker:
+    dependency: "direct main"
+    description:
+      name: image_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.0+8"
+>>>>>>> 6d01d6fa9424baac8c7b24e5db0d1796996ba63b
   matcher:
     dependency: transitive
     description:

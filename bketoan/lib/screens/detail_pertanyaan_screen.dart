@@ -11,10 +11,9 @@ class DetailPertanyaan extends StatefulWidget {
 class _DetailPertanyaanState extends State<DetailPertanyaan> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
         appBar: AppBar(
-          title: Text('your question'),
+          title: Text('Question Detail'),
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -49,15 +48,15 @@ class _DetailPertanyaanState extends State<DetailPertanyaan> {
                   Expanded(
                     flex: 1,
                     child: ButtonTheme(
-                      minWidth: 10.0,
+                        minWidth: 10.0,
                         child: FlatButton(
-                      onPressed: () {},
-                      child: SvgPicture.asset(
-                        'assets/icons/send.svg',
-                        width: 20.0,
-                        height: 30.0,
-                      ),
-                    )),
+                          onPressed: () {},
+                          child: SvgPicture.asset(
+                            'assets/icons/send.svg',
+                            width: 20.0,
+                            height: 30.0,
+                          ),
+                        )),
                   )
                 ],
               )),

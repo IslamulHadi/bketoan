@@ -20,7 +20,8 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   }
 
   void navigationPage() async {
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>Register())); // ignore: argument_type_not_assignable
+    Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (_) => Register()));
   }
 
   @override

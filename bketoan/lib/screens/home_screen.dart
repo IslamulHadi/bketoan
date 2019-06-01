@@ -32,8 +32,7 @@ class _HomeState extends State<Home> {
     _authBloc = Provider.of<AuthenticationBloc>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
-        title: Text('Beketoan'),
+        title: Text('Bketoan'),
       ),
       body: ListView(
         children: <Widget>[
@@ -95,14 +94,18 @@ class _HomeState extends State<Home> {
           DrawerHeader(
               child: Column(
             children: <Widget>[
-              // CircleAvatar(
-              //   child: SvgPicture.asset('assets/icons/lamp.svg'),
-              // ),
-              Text('Username')
+              CircleAvatar(
+                backgroundImage: NetworkImage(_authBloc.user.photoUrl),
+                radius: 50.0,
+              ),
+              Text(_authBloc.user.displayName),
+              Text(_authBloc.user.email),
             ],
           )),
           ButtonTheme(
-            child: FlatButton(onPressed: () => _authBloc.authEvent.add(LoggedOut()), child: Text('Logout')),
+            child: FlatButton(
+                onPressed: () => _authBloc.authEvent.add(LoggedOut()),
+                child: Text('Logout')),
           )
         ]),
       ),
