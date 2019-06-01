@@ -30,15 +30,7 @@ class _RegisterState extends State<Register>{
                   child: RaisedButton(
                     onPressed: (){
                       Navigator.of(context).push(MaterialPageRoute(builder: (_)=>Login()));
-
                     },
-                    child: Text('Login With FB'),
-                  ),
-                ),
-                ButtonTheme(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
-                  child: RaisedButton(
-                    onPressed: (){},
                     child: Text('Login with google'),
                   ),
                 )
