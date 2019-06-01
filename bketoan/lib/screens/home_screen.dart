@@ -45,7 +45,7 @@ class _HomeState extends State<Home> {
                 HeadPertanyaanComponent(),
                 Expanded(
                   child: StreamBuilder(
-                      stream: db.collection('question').snapshots(),
+                      stream: db.collection('quests').snapshots(),
                       builder: (BuildContext context,
                           AsyncSnapshot<QuerySnapshot> snapshot) {
                         if (snapshot.hasError)
@@ -56,7 +56,7 @@ class _HomeState extends State<Home> {
                           default:
                             return StreamBuilder(
                                 stream: db
-                                    .collection('questions')
+                                    .collection('quests')
                                     // .where('n', isEqualTo: 'faris')
                                     // .where('a', isEqualTo: 'mobjo')
                                     .snapshots(),
@@ -85,8 +85,8 @@ class _HomeState extends State<Home> {
         tooltip: 'Tambah Pertanyaan',
         onPressed: () {
           createData();
-          // Navigator.push(
-          //     context, MaterialPageRoute(builder: (_) => AddPertanyaan()));
+           Navigator.push(
+               context, MaterialPageRoute(builder: (_) => AddPertanyaan()));
         },
         child: Icon(Icons.add),
       ),

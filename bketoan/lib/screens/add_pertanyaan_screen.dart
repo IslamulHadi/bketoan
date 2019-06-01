@@ -1,7 +1,11 @@
 import 'dart:io';
+import 'dart:core';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
+import 'home_screen.dart';
+import 'label_screen.dart';
 
 class AddPertanyaan extends StatefulWidget {
   @override
@@ -16,19 +20,35 @@ class _AddPertanyaanState extends State<AddPertanyaan> {
   final labelController = TextEditingController();
   final questionController = TextEditingController();
   final fileCodeController = TextEditingController();
+  final db = Firestore.instance;
+  static var today = new DateTime.now();
+  var formatedTanggal = new DateFormat.yMMMd().format(today);
   @override
   void initState() {
     isanonym = false;
     _autovalidate = false;
     super.initState();
-
   }
+
   @override
   void dispose() {
     // TODO: implement dispose
     imagfile = null;
     super.dispose();
   }
+  void createData() async {
+    await db.collection('questions').add({
+      'created_at': formatedTanggal.toString(),
+      'label': labelController.text,
+      'question': questionController.text,
+      'status': 'Active',
+          'displayName': 'Diaz',
+      'photoUrl' : 'https://lh4.googleusercontent.com/-Dylt4o3LZ5k/AAAAAAAAAAI/AAAAAAAABbI/fPHqc4i7jnY/s96-c/photo.jpg',
+      'anonim' : isanonym,
+      'uid': 'zxl5g77iHdXfinbZThOSQUyoGlY2'
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -63,8 +83,8 @@ class _AddPertanyaanState extends State<AddPertanyaan> {
                     ),
                     Text('Your Question'),
                     TextFormField(
-                      validator: (val){
-                        if(val.isEmpty){
+                      validator: (val) {
+                        if (val.isEmpty) {
                           return 'Please fill question';
                         }
                       },
@@ -76,9 +96,15 @@ class _AddPertanyaanState extends State<AddPertanyaan> {
                       height: 5.0,
                     ),
                     Text('Your Label'),
+                    InkWell(onTap: ()async{
+                      labelController.text = await Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => AddLabel()));
+                    },child: Icon(Icons.add)),
                     InkWell(
                       onTap: () async {
-//                    questionController.text
+                        print('tetete');
+                        labelController.text = await Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => AddLabel()));
                       },
                       child: TextFormField(
                         validator: (val) {
@@ -90,19 +116,6 @@ class _AddPertanyaanState extends State<AddPertanyaan> {
                       ),
                     ),
 
-                    Text(''),
-//                    Row(children: [
-//                      FlatButton(
-//                        child: Icon(Icons.insert_drive_file),
-//                        onPressed: () async{
-//
-//                        },
-//                      ),
-//                      TextFormField(
-//                        controller: fileCodeController,
-//
-//                      )
-//                    ]),
                     Text(''),
                     FlatButton(
                       child: Icon(Icons.camera_alt),
@@ -126,12 +139,13 @@ class _AddPertanyaanState extends State<AddPertanyaan> {
                         ButtonTheme(
                           child: RaisedButton(
                             onPressed: () {
-                              if(_formquestion.currentState.validate()){
+                              if (_formquestion.currentState.validate()) {
                                 _formquestion.currentState.save();
-                              }else{
-                                _autovalidate =true;
+                                createData();
+                                Navigator.push(context, MaterialPageRoute(builder: (_)=>Home()));
+                              } else {
+                                _autovalidate = true;
                               }
-
                             },
                             child: Text('Simpan'),
                           ),
