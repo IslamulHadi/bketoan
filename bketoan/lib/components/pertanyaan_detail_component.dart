@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class PertanyaanDetailComponent extends StatelessWidget {
+class PertanyaanDetailComponent extends StatefulWidget {
   String username;
   String fullname;
   String avatar;
@@ -22,9 +22,22 @@ class PertanyaanDetailComponent extends StatelessWidget {
       this.gambar});
 
   @override
+  State<StatefulWidget> createState()=> _PertanyaanDetailComponent();
+}
+
+
+class _PertanyaanDetailComponent extends State<PertanyaanDetailComponent>{
+  bool isFavorited;
+
+  @override
+  void initState() {
+    isFavorited = false;
+    // TODO: implement initState
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Card(
+    return  Card(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 10.0),
         child: Column(
@@ -37,12 +50,16 @@ class PertanyaanDetailComponent extends StatelessWidget {
                 child: SvgPicture.asset('assets/icons/lamp.svg'),
               ),
               trailing: GestureDetector(
-                onTap: () {},
-                child: Icon(Icons.favorite),
+                onTap: () {
+                    setState(() {
+                      isFavorited = !isFavorited;
+                    });
+                },
+                child: isFavorited?Icon(Icons.favorite):Icon(Icons.favorite,color: Colors.red,),
               ),
             ),
-            Wrap(children: [Text(question)]),
-            Text(label),
+            Wrap(children: [Text(widget.question)]),
+            Text(widget.label),
             GestureDetector(
               child: Text(
                 'Download code here',
@@ -50,10 +67,11 @@ class PertanyaanDetailComponent extends StatelessWidget {
                     color: Colors.indigo, decoration: TextDecoration.underline),
               ),
             ),
-            gambar == null ? Placeholder() : Image.network(file)
+            widget.gambar == null ? Placeholder() : Image.network(widget.file)
           ],
         ),
       ),
-    );
+    );;
   }
+
 }
