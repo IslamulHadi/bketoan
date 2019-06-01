@@ -29,7 +29,7 @@ class _LoginState extends State<Login> {
                   borderRadius: BorderRadius.circular(4.0)),
               child: RaisedButton(
                 onPressed: () {},
-                child: Text('Ganti Profil'),
+                child: Text('Change Profil'),
               ),
             ),
             Padding(
@@ -42,13 +42,13 @@ class _LoginState extends State<Login> {
                     Text('Username'),
                     SizedBox(height: 5.0,),
                     TextFormField(
-                      decoration: InputDecoration(hintText: 'Username Anda'),
+                      decoration: InputDecoration(hintText: 'Your Username'),
                     ),
                     SizedBox(height: 20.0,),
                     Text('Fullname'),
                     SizedBox(height: 5.0,),
                     TextFormField(
-                      decoration: InputDecoration(hintText: 'Fullname Anda'),
+                      decoration: InputDecoration(hintText: 'Your Fullname'),
                     ),
                     SizedBox(height: 20.0,),
                     ButtonTheme(

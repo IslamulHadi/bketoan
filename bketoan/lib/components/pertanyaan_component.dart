@@ -1,3 +1,5 @@
+import 'package:bketoan/components/pertanyaan_detail_component.dart';
+import 'package:bketoan/screens/detail_pertanyaan_screen.dart';
 import 'package:flutter/material.dart';
 
 class PertanyaanComponent extends StatelessWidget{
@@ -13,7 +15,7 @@ class PertanyaanComponent extends StatelessWidget{
     // TODO: implement build
     return InkWell(
       onTap: (){
-        //
+        Navigator.of(context).push(MaterialPageRoute(builder: (_)=>DetailPertanyaan()));
       },
       child: Card(
         shape: RoundedRectangleBorder(),

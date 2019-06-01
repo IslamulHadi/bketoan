@@ -48,7 +48,7 @@ class _AddPertanyaanState extends State<AddPertanyaan> {
                     ),
                   ],
                 ),
-                Text('Pertanyaan'),
+                Text('Your Question'),
                 TextFormField(
                   maxLines: 5,
                   keyboardType: TextInputType.multiline,
