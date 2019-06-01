@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "767282205443",
+    "firebase_url": "https://bketoan-50f5c.firebaseio.com",
+    "project_id": "bketoan-50f5c",
+    "storage_bucket": "bketoan-50f5c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767282205443:android:6311127c6c5e549a",
+        "android_client_info": {
+          "package_name": "com.example.bketoan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "767282205443-nbsmm2c51ro9bj9i71ttgsf5k9hp99kl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEejiiNrxow3R7cOR6rOqeEew-xqIuyhY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "767282205443-nbsmm2c51ro9bj9i71ttgsf5k9hp99kl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
