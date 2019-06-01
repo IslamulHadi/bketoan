@@ -1,8 +1,10 @@
+import 'package:bketoan/bloc/authentication/bloc.dart';
 import 'package:bketoan/screens/add_pertanyaan_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bketoan/components/pertanyaan_component.dart';
 import 'package:bketoan/components/head_pertanyaan_component.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -10,18 +12,24 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  AuthenticationBloc _authBloc;
   final db = Firestore.instance;
   void deleteData(DocumentSnapshot doc) async {
     await db.collection('questions').document(doc.documentID).delete();
   }
 
   void createData() async {
-    await db
-        .collection('questions')
-        .add({'created_at': '9:00:00 AM', 'label': 'labels/2nQdn2WmJbMGfJ4nEDJc', 'question': 'Tes Pertanyaan5', 'status': 'Active'});
+    await db.collection('questions').add({
+      'created_at': '9:00:00 AM',
+      'label': 'labels/2nQdn2WmJbMGfJ4nEDJc',
+      'question': 'Tes Pertanyaan5',
+      'status': 'Active'
+    });
   }
+
   @override
   Widget build(BuildContext context) {
+    _authBloc = Provider.of<AuthenticationBloc>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
@@ -94,7 +102,7 @@ class _HomeState extends State<Home> {
             ],
           )),
           ButtonTheme(
-            child: FlatButton(onPressed: () {}, child: Text('Logout')),
+            child: FlatButton(onPressed: () => _authBloc.authEvent.add(LoggedOut()), child: Text('Logout')),
           )
         ]),
       ),

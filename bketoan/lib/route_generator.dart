@@ -1,3 +1,4 @@
+import 'package:bketoan/screens/home_screen.dart';
 import 'package:bketoan/screens/not_found_screen.dart';
 import 'package:bketoan/screens/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,6 +11,8 @@ class RouteGenerator {
     switch (settings.name) {
       case '/':
         return CupertinoPageRoute(builder: (_) => Splash());
+      case '/home':
+        return CupertinoPageRoute(builder: (_) => Home());
       default:
         return CupertinoPageRoute(builder: (_) => NotFoundScreen());
     }

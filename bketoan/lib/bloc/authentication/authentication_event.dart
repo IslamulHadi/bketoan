@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
-import 'package:mitralaundry/models/user.dart';
 
 @immutable
 abstract class AuthenticationEvent extends Equatable {
@@ -10,10 +10,9 @@ abstract class AuthenticationEvent extends Equatable {
 class AppStarted extends AuthenticationEvent {}
 
 class LoggedIn extends AuthenticationEvent {
-  final String token;
-  final Map<String, dynamic> user;
+  final FirebaseUser user;
 
-  LoggedIn({@required this.token, this.user}) : super([token, user]);
+  LoggedIn({this.user}) : super([user]);
 }
 
 class LoggedOut extends AuthenticationEvent {}

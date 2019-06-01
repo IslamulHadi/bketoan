@@ -1,10 +1,9 @@
+import 'package:bketoan/bloc/authentication/bloc.dart';
 import 'package:bketoan/components/logo_component.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
-final GoogleSignIn _googleSignIn = GoogleSignIn();
-final FirebaseAuth _auth = FirebaseAuth.instance;
+import 'package:provider/provider.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -12,8 +11,13 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  AuthenticationBloc _authBloc;
+
   @override
   Widget build(BuildContext context) {
+    _authBloc = Provider.of<AuthenticationBloc>(context);
     return Scaffold(
       body: Container(
           height: MediaQuery.of(context).size.height,
@@ -47,7 +51,7 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  Future<FirebaseUser> _handleSignIn() async {
+  _handleSignIn() async {
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     final GoogleSignInAuthentication googleAuth =
         await googleUser.authentication;
@@ -58,7 +62,6 @@ class _RegisterState extends State<Register> {
     );
 
     final FirebaseUser user = await _auth.signInWithCredential(credential);
-    print("signed in " + user.displayName);
-    return user;
+    _authBloc.authEvent.add(LoggedIn(user: user));
   }
 }

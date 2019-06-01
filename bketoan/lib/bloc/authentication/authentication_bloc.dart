@@ -2,10 +2,15 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:bketoan/bloc/authentication/bloc.dart';
+import 'package:bketoan/bloc/bloc_base.dart';
+import 'package:bketoan/models/user.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthenticationBloc implements BlocBase {
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
   User user;
 
   final _eventCtrl = StreamController<AuthenticationEvent>();
@@ -21,39 +26,22 @@ class AuthenticationBloc implements BlocBase {
   @override
   handleEvent(event) async {
     if (event is AppStarted) {
-      await Future.delayed(Duration(seconds: 2));
-      final bool hasToken = await UserRepository.hasToken();
-      if (hasToken) {
-        String userString = await UserRepository.loadUser();
-        user = User.fromJson(json.decode(userString));
-        _authStateCtrl.sink.add(AuthenticationAuthenticated());
-      } else {
-        _authStateCtrl.sink.add(AuthenticationUnauthenticated());
-      }
+      _authStateCtrl.sink.add(AuthenticationAuthenticated());
     }
     if (event is LoggedIn) {
       _authStateCtrl.sink.add(AuthenticationLoading());
-      await UserRepository.persistToken(event.token);
-      await UserRepository.persistUser(json.encode(event.user));
-      user = User.fromJson(event.user);
+      user = User(
+        displayName: event.user.displayName,
+        email: event.user.email,
+        photoUrl: event.user.photoUrl,
+        uid: event.user.uid,
+      );
       _authStateCtrl.sink.add(AuthenticationAuthenticated());
     }
 
     if (event is LoggedOut) {
       _authStateCtrl.sink.add(AuthenticationLoading());
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String loginMethod = prefs.getString('loginMethod');
-      if (loginMethod == 'google') {
-        GoogleSignIn _googleSignIn = GoogleSignIn(
-          scopes: [
-            'email',
-            'https://www.googleapis.com/auth/contacts.readonly',
-          ],
-        );
-        _googleSignIn.disconnect();
-      }
-      prefs.remove('loginMethod');
-      // await UserRepository.deleteToken();
+      _googleSignIn.signOut();
       _authStateCtrl.sink.add(AuthenticationUnauthenticated());
     }
   }
