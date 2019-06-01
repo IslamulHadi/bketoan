@@ -36,7 +36,7 @@ class AuthenticationBloc implements BlocBase {
         photoUrl: event.user.photoUrl,
         uid: event.user.uid,
       );
-      print(user.photoUrl);
+      print(user.uid);
       _authStateCtrl.sink.add(AuthenticationAuthenticated());
     }
 
