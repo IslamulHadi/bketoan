@@ -1,9 +1,10 @@
+import 'package:bketoan/route_generator.dart';
 import 'package:flutter/material.dart';
 
 import 'screens/splash_screen.dart';
 
-void main(){
-   runApp(MyApp());
+void main() {
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -14,6 +15,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Bketoan',
       home: Splash(),
+      initialRoute: '/',
+      onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }
